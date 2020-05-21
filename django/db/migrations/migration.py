@@ -121,7 +121,10 @@ class Migration:
                     operation.database_forwards(self.app_label, schema_editor, old_state, project_state)
             else:
                 # Normal behaviour
-                operation.database_forwards(self.app_label, schema_editor, old_state, project_state)
+                try:
+                    operation.database_forwards(self.app_label, schema_editor, old_state, project_state)
+                except:
+                    pass
         return project_state
 
     def unapply(self, project_state, schema_editor, collect_sql=False):
